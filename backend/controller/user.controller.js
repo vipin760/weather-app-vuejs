@@ -13,7 +13,6 @@ const generateToken = (user) =>{
 ////////////////////////////////////////////////////////////////////////////////////
 
 exports.userRegister = catchAsyncErrors( async(req,res,next)=>{
-    console.log(req.body)
     const {name,email,password} =req.body
     const passwordHash = await bcrypt.hash(password,10)
     await User.create({
