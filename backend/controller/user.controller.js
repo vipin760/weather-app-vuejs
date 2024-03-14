@@ -50,3 +50,7 @@ exports.logoutUser = catchAsyncErrors(async (req,res,next)=>{
     })
     res.status(201).send({status:true, message:"Loggout Success"})
 })
+/////////////////////////////logout///////////////////////////////////////////////////////
+exports.getData = catchAsyncErrors( async(req,res,next)=>{
+    res.status(200).send({message:"all data fetch success....."})
+})
