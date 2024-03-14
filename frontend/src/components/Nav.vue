@@ -3,6 +3,7 @@ import axios from "axios";
 import { ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { BASE_URL } from "../axios";
+import {uid} from "uid"
 
 const isLoggedIn = ref(!!sessionStorage.getItem("token"));
 
@@ -21,10 +22,35 @@ const handleLogout = async () => {
     })
     .catch((err) => {
       this.$toast.error(`${err.response.data.message}`);
-      console.log(err);
     });
 };
 // Navigation guard to check authentication status before each navigation
+const savedCities =ref([])
+const route = useRoute()
+const addCity = () =>{
+  if(localStorage.getItem("savedCities")){
+    savedCities.value = JSON.parse(
+      localStorage.getItem("savedCities")
+    )
+  }
+  const locationObj = {
+    id:uid(),
+    state:route.params.state,
+    city:route.params.city,
+    coords:{
+      lat:route.query.lat,
+      lng:route.query.lng,
+    }
+  }
+  savedCities.value.push(locationObj)
+  localStorage.setItem("savedCities",JSON.stringify(savedCities.value))
+
+  let query = Object.assign({},route.query);
+  delete query.preview;
+  query.id=locationObj.id;
+  router.replace({query})
+}
+
 </script>
 
 <template>
@@ -33,6 +59,7 @@ const handleLogout = async () => {
       <div class="flex items-center gap-3 flex-1">
         <i class="fa-regular fa-sun text-2xl"></i>
         <p class="text-2xl">The Local Weather</p>
+        <i class="fa-solid fa-store mt-2 text-xl hover:text-weather-secondary duration-150 cursor-pointer" @click="addCity"></i>
       </div>
       <div class="flex flex-1 gap-3 justify-end">
         <router-link
@@ -59,34 +86,5 @@ const handleLogout = async () => {
       </div>
     </nav>
   </header>
-  <!--
-        <div class="flex text-white m-3 items-center gap-3 flex-1">
-        <i class="fa-regular fa-sun text-1xl"></i>
-        <p class="text-1xl">The Local Weather</p>
-      </div>
-
-
-        <div class="hidden sm:ml-6 sm:block">
-          <div class="flex space-x-4">
-          </div>
-        </div>
-      </div>
-
-
-      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-        <div class="relative ml-3">
-          <div>
-           <template v-if="isUserLoggedIn">
-            <a href="#" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page" @click="handleLogout">Logout</a>
-           </template>
-            <template v-else>
-            <router-link to='/login' class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Login</router-link>
-            </template>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</nav> -->
   <!-- navbar end -->
 </template>

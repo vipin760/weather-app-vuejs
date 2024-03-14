@@ -95,12 +95,19 @@
       </div>
     </div>
     <!-- weakly weather end-->
+    <div
+      class="flex items-center gap-2 py-12 text-white cursor-pointer duration-150 hover:text-red-500"
+      @click="removeCity"
+    >
+      <i class="fa-solid fa-trash"></i>
+      <p>Remove City</p>
+    </div>
   </div>
 </template>
 
 <script setup>
 import axios from "axios";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
 const getWeatherData = async () => {
   try {
@@ -108,7 +115,6 @@ const getWeatherData = async () => {
     const weatherData = await axios.get(
       `https://api.openweathermap.org/data/2.5/onecall?lat=${route.query.lat}&lon=${route.query.lng}&exclude={part}&appid=7efa332cf48aeb9d2d391a51027f1a71&units=imperial`
     );
-    console.log(weatherData);
     // cal current date & time
     const localOffset = new Date().getTimezoneOffset() * 60000;
     const utc = weatherData.data.current.dt * 1000 + localOffset;
@@ -121,10 +127,17 @@ const getWeatherData = async () => {
     });
     return weatherData.data;
   } catch (error) {
-    console.log(error);
+    this.$toast.error(`${error.response.data.message}`);
   }
 };
 const weatherData = await getWeatherData();
+const router = useRouter();
+const removeCity = () => {
+  const cities = JSON.parse(localStorage.getItem("savedCities"));
+  const updatedCities = cities.filter((city) => city.id !== route.query.id);
+  localStorage.setItem("savedCities", JSON.stringify(updatedCities));
+  router.push({ name: "Home" });
+};
 </script>
 
 <style lang="scss" scoped></style>

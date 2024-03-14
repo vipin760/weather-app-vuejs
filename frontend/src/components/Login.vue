@@ -67,17 +67,6 @@
       </div>
     </div>
   </div>
-  <!-- <div id="app">
-  <label for="">name</label>
-    <Form @submit="onSubmit">
-      <Field name="email" type="email" :rules="validateEmail"  />
-      <ErrorMessage name="email" />
-
-            <Field name="password" type="password" :rules="validatePassword"  />
-      <ErrorMessage name="password" />
-      <button>Sign up</button>
-    </Form>
-  </div> -->
 </template>
 
 <script>
@@ -98,10 +87,8 @@ export default {
           sessionStorage.setItem("token", JSON.stringify(res.data.data));
           this.$toast.success(`${res.data.message}`);
           window.location.href = "/";
-          console.log(res);
         });
       } catch (error) {
-        console.log(error);
         this.$toast.error(`${error.response.data.message}`);
       }
     },

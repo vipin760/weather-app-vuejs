@@ -1,6 +1,7 @@
 <script setup>
 import Nav from "./Nav.vue";
 import SearchLocation from "../components/partials/SearchLocation.vue";
+import CityList from "../components/partials/CityList.vue";
 ////////////////////////////////////////
 import axios from "axios";
 import { ref } from "vue";
@@ -38,7 +39,7 @@ const getWeatherData = async (lat, lng) => {
     });
     weatherInfo.value = weatherData.data;
   } catch (error) {
-    console.log(error);
+    this.$toast.error(`${error.response.data.message}`);
   }
 };
 ////////////////////////////////////
@@ -47,7 +48,18 @@ const getWeatherData = async (lat, lng) => {
   <Nav />
   <div class="flex flex-col min-h-screen bg-weather-primary">
     <SearchLocation />
-    <div class="text-center">
+
+    <!-- saved cities start -->
+    <div class="flex flex-col gap-4">
+      <Suspense>
+        <CityList />
+        <template #fallback>
+          <p class="text-center m-3">Loading.....</p>
+        </template>
+      </Suspense>
+    </div>
+    <!-- saved cities end -->
+    <div class="text-center m-5">
       <button
         class="text-white shadow-lg bg-black p-2 hover:weather-secondary rounded"
         @click="getCurrentLocation"

@@ -118,7 +118,6 @@ export default {
         });
       } catch (error) {
         this.$toast.error(`${error.response.data.message}`);
-
       }
     },
     validateName(value) {
