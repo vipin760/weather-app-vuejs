@@ -28,7 +28,7 @@
                 placeholder="Enter Name...."
                 required=""
               />
-              <ErrorMessage name="name" />
+              <ErrorMessage name="name" class="text-red-800 font-bold"/>
             </div>
             <div>
               <label
@@ -45,7 +45,7 @@
                 placeholder="name@company.com"
                 required=""
               />
-              <ErrorMessage name="email" />
+              <ErrorMessage name="email" class="text-red-800 font-bold" />
             </div>
             <div>
               <label
@@ -62,11 +62,10 @@
                 placeholder="name@company.com"
                 required=""
               />
-              <ErrorMessage name="password" />
+              <ErrorMessage name="password" class="text-red-800 font-bold" />
             </div>
 
-            <!-- <button type="submit" class="w-full text-white bg-Purple-700 hover:bg-Purple-700 focus:ring-4 focus:outline-none focus:bg-Purple-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-Purple-700 dark:hover:bg-Purple-700 dark:focus:bg-Purple-700">Sign in</button> -->
-            <button
+            <button 
               class="bg-indigo-950 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
               Register
@@ -85,17 +84,6 @@
       </div>
     </div>
   </div>
-  <!-- <div id="app">
-  <label for="">name</label>
-    <Form @submit="onSubmit">
-      <Field name="email" type="email" :rules="validateEmail"  />
-      <ErrorMessage name="email" />
-
-            <Field name="password" type="password" :rules="validatePassword"  />
-      <ErrorMessage name="password" />
-      <button>Sign up</button>
-    </Form>
-  </div> -->
 </template>
 
 <script>
@@ -131,32 +119,32 @@ export default {
     },
     validateEmail(value) {
       if (!value) {
-        return "This field is required";
+        return "* This field is required";
       }
       const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
       if (!regex.test(value)) {
-        return "This field must be a valid email";
+        return "* This field must be a valid email";
       }
       return true;
     },
     validatePassword(value) {
       if (!value) {
-        return "This field is required";
+        return "* This field is required";
       }
       if (value.length < 8) {
-        return "Password must be at least 8 characters long";
+        return "* Password must be at least 8 characters long";
       }
       if (!/[A-Z]/.test(value)) {
-        return "Password must contain at least one uppercase letter";
+        return "* Password must contain at least one uppercase letter";
       }
       if (!/[a-z]/.test(value)) {
-        return "Password must contain at least one lowercase letter";
+        return "* Password must contain at least one lowercase letter";
       }
       if (!/\d/.test(value)) {
-        return "Password must contain at least one number";
+        return "* Password must contain at least one number";
       }
       if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
-        return "Password must contain at least one special character";
+        return "* Password must contain at least one special character";
       }
       return true;
     },
