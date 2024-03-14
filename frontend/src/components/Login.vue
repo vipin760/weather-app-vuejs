@@ -1,5 +1,5 @@
 <template>
-<div class="bg-gray-50 dark:bg-gray-900 min-h-screen flex items-center justify-center">
+  <div class="bg-gray-50 dark:bg-gray-900 min-h-screen flex items-center justify-center">
     <div
       class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
     >
@@ -19,7 +19,8 @@
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >Your email</label
               >
-              <Field :rules="validateEmail"
+              <Field
+                :rules="validateEmail"
                 type="email"
                 name="email"
                 id="email"
@@ -35,7 +36,8 @@
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >Your password</label
               >
-              <Field :rules="validatePassword"
+              <Field
+                :rules="validatePassword"
                 type="password"
                 name="password"
                 id="password"
@@ -79,45 +81,46 @@
 </template>
 
 <script>
-import { Form, Field, ErrorMessage  } from 'vee-validate';
-import axios from 'axios'
+import { Form, Field, ErrorMessage } from "vee-validate";
+import axios from "axios";
 import { BASE_URL } from "../axios.js";
 import { useRouter } from "vue-router";
 export default {
   components: {
     Form,
     Field,
-    ErrorMessage
+    ErrorMessage,
   },
   methods: {
-   async onSubmit(values) {
+    async onSubmit(values) {
       try {
-        await axios.post(`${BASE_URL}/user/login`,values).then((res)=>{
+        await axios.post(`${BASE_URL}/user/login`, values).then((res) => {
           sessionStorage.setItem("token", JSON.stringify(res.data.data));
-         window.location.href = '/'
-        console.log(res)
-      })
+          this.$toast.success(`${res.data.message}`);
+          window.location.href = "/";
+          console.log(res);
+        });
       } catch (error) {
-        console.log(error)
+        console.log(error);
+        this.$toast.error(`${error.response.data.message}`);
       }
-      
     },
     validateEmail(value) {
       if (!value) {
-        return 'This field is required';
+        return "This field is required";
       }
       const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
       if (!regex.test(value)) {
-        return 'This field must be a valid email';
+        return "This field must be a valid email";
       }
       return true;
     },
-    validatePassword(value){
+    validatePassword(value) {
       if (!value) {
-        return 'This field is required';
+        return "This field is required";
       }
-      return true
-    }
+      return true;
+    },
   },
 };
 </script>
