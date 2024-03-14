@@ -67,7 +67,7 @@
             <button
               class="bg-indigo-950 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
-              Login
+              Register
             </button>
 
             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
