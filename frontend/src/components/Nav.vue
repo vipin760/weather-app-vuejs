@@ -22,23 +22,7 @@ const handleLogout= async()=>{
     })
 }
 // Navigation guard to check authentication status before each navigation
-router.beforeEach((to, from, next) => {
-  if (to.name === 'Login') {
-    // If navigating to the login page, no need to check authentication
-    next();
-  } else {
-    // For other pages, check if the user is logged in
-    if (sessionStorage.getItem('token')) {
-      // User is logged in
-      isLoggedIn.value = true;
-      next();
-    } else {
-      // User is not logged in, redirect to login page
-      isLoggedIn.value = false;
-      next({ name: 'Login' });
-    }
-  }
-});
+
 </script>
 
 <template>

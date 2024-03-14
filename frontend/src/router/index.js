@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../components/Home.vue";
-import { guardMyroute, authGuard } from "/src/store/routeGuard";
+import NotFound from "../components/partials/NotFound.vue"
+import { guardMyroute, authGuard } from "../store/routeGuard";
 
 const routes = [
-  { path: "/", name: "Home", beforeEnter: guardMyroute, component: Home },
+  { path: "/", name: "Home",beforeEnter:guardMyroute, component: Home },
   {
     path: "/login",
     name: "Login",
@@ -13,8 +14,15 @@ const routes = [
   {
     path: "/register",
     name: "Register",
+    beforeEnter: authGuard,
     component: () => import("../components/Register.vue"),
   },
+  {
+    path:"/not-found",
+    name:"NotFound",
+    component:NotFound
+  },
+  { path: '/:pathMatch(.*)*', redirect: '/not-found' }
 ];
 
 const router = createRouter({
