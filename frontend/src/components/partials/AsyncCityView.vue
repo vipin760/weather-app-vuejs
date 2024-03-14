@@ -122,7 +122,6 @@ const getWeatherData = async () => {
   }
 };
 const weatherData = await getWeatherData();
-console.log("weatherData", weatherData);
 </script>
 
 <style lang="scss" scoped></style>
