@@ -1,10 +1,10 @@
 <script setup>
 import Nav from "./Nav.vue";
+import SearchLocation from "../components/partials/SearchLocation.vue"
 </script>
-
 <template>
 <Nav /> 
-     <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
-</template>
+<div class="flex flex-col min-h-screen bg-weather-primary">
+<SearchLocation/>
+</div>
+   </template>

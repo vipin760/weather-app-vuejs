@@ -2,9 +2,11 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../components/Home.vue";
 import NotFound from "../components/partials/NotFound.vue"
 import { guardMyroute, authGuard } from "../store/routeGuard";
+import CityView from "../components/CityView.vue";
 
 const routes = [
   { path: "/", name: "Home",beforeEnter:guardMyroute, component: Home },
+  { path: "/weather/:state/:city", name: "cityView",beforeEnter:guardMyroute, component: CityView },
   {
     path: "/login",
     name: "Login",

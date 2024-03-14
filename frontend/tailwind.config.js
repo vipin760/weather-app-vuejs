@@ -5,7 +5,15 @@ export default {
     extend: {
       colors:{
         "weather-primary":"#133955",
-        "weather-secondary":"#696667FF",
+        "weather-secondary":"#00205b",
+      },
+      container:{
+        padding:"2rem",
+        center:true
+      },
+      screens:{
+        sm:"640px",
+        md:"768px"
       }
     },
   },

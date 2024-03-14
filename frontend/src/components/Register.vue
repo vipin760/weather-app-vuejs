@@ -2,13 +2,14 @@
 import axios from "axios";
 import { useRouter } from "vue-router";
 import {ref} from "vue"
+import { BASE_URL } from '../axios.js'
 
 const router = useRouter();
 const form = ref({
     name:'',email:'',password:'',cpassword:''
 })
 const handleRegister=async()=>{
-    await axios.post('/user/register',{name:form.value.name,email:form.value.email,password:form.value.password,cpassword:form.value.cpassword}).then((data)=>{
+    await axios.post(`${BASE_URL}/user/register`,{name:form.value.name,email:form.value.email,password:form.value.password,cpassword:form.value.cpassword}).then((data)=>{
         console.log(data)
         router.push('/login')
     }).catch((err)=>{

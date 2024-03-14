@@ -1,8 +1,8 @@
 <script setup>
 </script>
 <template>
-<main>
- <RouterView />
-</main>
+<div class="flex flex-col min-h-screen ">
+    <RouterView />
+  </div>
 </template>
 
