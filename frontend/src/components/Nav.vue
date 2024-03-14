@@ -59,7 +59,7 @@ const addCity = () =>{
       <div class="flex items-center gap-3 flex-1">
         <i class="fa-regular fa-sun text-2xl"></i>
         <p class="text-2xl">The Local Weather</p>
-        <i class="fa-solid fa-store mt-2 text-xl hover:text-weather-secondary duration-150 cursor-pointer" @click="addCity"></i>
+        <i class="fa-solid fa-plus mt-2 text-xl hover:text-weather-secondary duration-150 cursor-pointer" @click="addCity"></i>
       </div>
       <div class="flex flex-1 gap-3 justify-end">
         <router-link

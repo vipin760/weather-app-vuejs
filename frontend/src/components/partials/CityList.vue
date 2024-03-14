@@ -36,7 +36,9 @@ const goToCityView = (city) => {
   <div v-for="city in savedCities" :key="city.id">
     <CityCard :city="city" @click="goToCityView(city)" />
   </div>
-  <p v-if="savedCities.length === 0">
+  <div class="text-center text-sky-400">
+    <p v-if="savedCities.length === 0">
     currently not available saved location, search in the field...
   </p>
+  </div>
 </template>

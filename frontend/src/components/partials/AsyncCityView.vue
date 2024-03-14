@@ -5,7 +5,7 @@
       v-if="route.query.preview"
       class="text-white p-4 bg-weather-secondary w-full text-center"
     >
-      <p>your are currently previewing this city ,local weather data....!</p>
+      <p>You are presently previewing local weather data for this city. The "+" button enables you to store this weather data. !</p>
     </div>
     <!--banners end-->
     <!--weather api overview start-->
